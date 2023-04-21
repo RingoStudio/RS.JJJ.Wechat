@@ -1,0 +1,271 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "Aliyun.OSS.SDK.NetCore/2.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Aliyun.OSS.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Aliyun.OSS.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Protobuf/3.22.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Ionic.Zlib.Core/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Ionic.Zlib.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ionic.Zlib.Core.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "RC4Cryptography/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/RC4Cryptography.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/RC4Cryptography.dll": {}
+        }
+      },
+      "RS.Tools.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Ionic.Zlib.Core": "1.0.0",
+          "Newtonsoft.Json": "13.0.1",
+          "RC4Cryptography": "1.0.1"
+        },
+        "compile": {
+          "bin/placeholder/RS.Tools.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RS.Tools.Common.dll": {}
+        }
+      },
+      "RS.Tools.Network/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Aliyun.OSS.SDK.NetCore": "2.13.0"
+        },
+        "compile": {
+          "bin/placeholder/RS.Tools.Network.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RS.Tools.Network.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Aliyun.OSS.SDK.NetCore/2.13.0": {
+      "sha512": "ElvJwTAdBqFmgb7K4PdxDXPFbOBCIUI5OvCOMfCoUoDL21aivtWMFUtU1v4Dxc2wcrN8XQdY1EKeGFhJK/zVyQ==",
+      "type": "package",
+      "path": "aliyun.oss.sdk.netcore/2.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aliyun.oss.sdk.netcore.2.13.0.nupkg.sha512",
+        "aliyun.oss.sdk.netcore.nuspec",
+        "lib/netstandard2.0/Aliyun.OSS.Core.dll",
+        "lib/netstandard2.0/Aliyun.OSS.Core.pdb",
+        "lib/netstandard2.0/Aliyun.OSS.Core.xml"
+      ]
+    },
+    "Google.Protobuf/3.22.0": {
+      "sha512": "UE1TRMrBBBmnA8xbqzTvX4sSwn+2W/Xxrs/v5Aws/7C8RD6fY6STi1eAnCu7Ez93oHcPdpyStGnFel/aIB407Q==",
+      "type": "package",
+      "path": "google.protobuf/3.22.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.22.0.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net45/Google.Protobuf.dll",
+        "lib/net45/Google.Protobuf.pdb",
+        "lib/net45/Google.Protobuf.xml",
+        "lib/net5.0/Google.Protobuf.dll",
+        "lib/net5.0/Google.Protobuf.pdb",
+        "lib/net5.0/Google.Protobuf.xml",
+        "lib/netstandard1.1/Google.Protobuf.dll",
+        "lib/netstandard1.1/Google.Protobuf.pdb",
+        "lib/netstandard1.1/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "Ionic.Zlib.Core/1.0.0": {
+      "sha512": "3GBgjMQA/uPTiqv+wMCpLsyK5dcHCF6EV8+pg4IMKLbgbMGEtIkvErEO4ql5Cv18n94Smf3NAhY/sCed2Tb+Tw==",
+      "type": "package",
+      "path": "ionic.zlib.core/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ionic.zlib.core.1.0.0.nupkg.sha512",
+        "ionic.zlib.core.nuspec",
+        "lib/netstandard2.0/Ionic.Zlib.Core.dll"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "RC4Cryptography/1.0.1": {
+      "sha512": "8v4gGw5GxVuSjPR90PGD4Tb7y5Y/z1oCzK7mng+l4pJkuC3KeRqsIbZCsKgMSdGhxkbpPKA8o6yi6Hd3rJRmpQ==",
+      "type": "package",
+      "path": "rc4cryptography/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.0/RC4Cryptography.dll",
+        "lib/netstandard2.0/RC4Cryptography.dll",
+        "rc4cryptography.1.0.1.nupkg.sha512",
+        "rc4cryptography.nuspec"
+      ]
+    },
+    "RS.Tools.Common/1.0.0": {
+      "type": "project",
+      "path": "../../../Tools/Common/RS.Tools.Common.csproj",
+      "msbuildProject": "../../../Tools/Common/RS.Tools.Common.csproj"
+    },
+    "RS.Tools.Network/1.0.0": {
+      "type": "project",
+      "path": "../../../Tools/Network/RS.Tools.Network.csproj",
+      "msbuildProject": "../../../Tools/Network/RS.Tools.Network.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "Google.Protobuf >= 3.22.0",
+      "RS.Tools.Common >= 1.0.0",
+      "RS.Tools.Network >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\RingoZhang\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS.Snail.JJJ.Wechat.csproj",
+      "projectName": "RS.Snail.JJJ.Wechat",
+      "projectPath": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS.Snail.JJJ.Wechat.csproj",
+      "packagesPath": "C:\\Users\\RingoZhang\\.nuget\\packages\\",
+      "outputPath": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\RingoZhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj": {
+              "projectPath": "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj"
+            },
+            "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj": {
+              "projectPath": "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "Google.Protobuf": {
+            "target": "Package",
+            "version": "[3.22.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

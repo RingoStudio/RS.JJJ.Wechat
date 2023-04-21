@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "restore": {
+    "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS,JJJ.Wechat.csproj": {}
+  },
+  "projects": {
+    "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS,JJJ.Wechat.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS,JJJ.Wechat.csproj",
+        "projectName": "RS,JJJ.Wechat",
+        "projectPath": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\RS,JJJ.Wechat.csproj",
+        "packagesPath": "C:\\Users\\RingoZhang\\.nuget\\packages\\",
+        "outputPath": "J:\\Projects\\RS\\Snail\\JJJ\\Wechat\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RingoZhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj": {
+                "projectPath": "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj"
+              },
+              "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj": {
+                "projectPath": "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.22.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj",
+        "projectName": "RS.Tools.Common",
+        "projectPath": "J:\\Projects\\RS\\Tools\\Common\\RS.Tools.Common.csproj",
+        "packagesPath": "C:\\Users\\RingoZhang\\.nuget\\packages\\",
+        "outputPath": "J:\\Projects\\RS\\Tools\\Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RingoZhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Ionic.Zlib.Core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj",
+        "projectName": "RS.Tools.Network",
+        "projectPath": "J:\\Projects\\RS\\Tools\\Network\\RS.Tools.Network.csproj",
+        "packagesPath": "C:\\Users\\RingoZhang\\.nuget\\packages\\",
+        "outputPath": "J:\\Projects\\RS\\Tools\\Network\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RingoZhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Aliyun.OSS.SDK.NetCore": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\RS,JJJ.Wechat.deps.json
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\RS,JJJ.Wechat.dll
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\RS,JJJ.Wechat.pdb
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.csproj.AssemblyReference.cache
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.GeneratedMSBuildEditorConfig.editorconfig
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.AssemblyInfoInputs.cache
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.AssemblyInfo.cs
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.csproj.CoreCompileInputs.cache
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.dll
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\refint\RS,JJJ.Wechat.dll
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\RS,JJJ.Wechat.pdb
+J:\Projects\RS\Snail\JJJ\Wechat\obj\Debug\net6.0\ref\RS,JJJ.Wechat.dll
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\lib\http\SWeChatRobot.dll
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\lib\http\wxDriver64.dll
+J:\Projects\RS\Snail\JJJ\Wechat\bin\Debug\net6.0\lib\http\wxDriver64.lib

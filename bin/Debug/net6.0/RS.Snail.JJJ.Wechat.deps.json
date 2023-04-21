@@ -1,0 +1,131 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "RS.Snail.JJJ.Wechat/1.0.0": {
+        "dependencies": {
+          "Google.Protobuf": "3.22.0",
+          "RS.Tools.Common": "1.0.0",
+          "RS.Tools.Network": "1.0.0"
+        },
+        "runtime": {
+          "RS.Snail.JJJ.Wechat.dll": {}
+        }
+      },
+      "Aliyun.OSS.SDK.NetCore/2.13.0": {
+        "runtime": {
+          "lib/netstandard2.0/Aliyun.OSS.Core.dll": {
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
+          }
+        }
+      },
+      "Google.Protobuf/3.22.0": {
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.22.0.0",
+            "fileVersion": "3.22.0.0"
+          }
+        }
+      },
+      "Ionic.Zlib.Core/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Ionic.Zlib.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "RC4Cryptography/1.0.1": {
+        "runtime": {
+          "lib/netcoreapp3.0/RC4Cryptography.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
+          }
+        }
+      },
+      "RS.Tools.Common/1.0.0": {
+        "dependencies": {
+          "Ionic.Zlib.Core": "1.0.0",
+          "Newtonsoft.Json": "13.0.1",
+          "RC4Cryptography": "1.0.1"
+        },
+        "runtime": {
+          "RS.Tools.Common.dll": {}
+        }
+      },
+      "RS.Tools.Network/1.0.0": {
+        "dependencies": {
+          "Aliyun.OSS.SDK.NetCore": "2.13.0"
+        },
+        "runtime": {
+          "RS.Tools.Network.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "RS.Snail.JJJ.Wechat/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aliyun.OSS.SDK.NetCore/2.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ElvJwTAdBqFmgb7K4PdxDXPFbOBCIUI5OvCOMfCoUoDL21aivtWMFUtU1v4Dxc2wcrN8XQdY1EKeGFhJK/zVyQ==",
+      "path": "aliyun.oss.sdk.netcore/2.13.0",
+      "hashPath": "aliyun.oss.sdk.netcore.2.13.0.nupkg.sha512"
+    },
+    "Google.Protobuf/3.22.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UE1TRMrBBBmnA8xbqzTvX4sSwn+2W/Xxrs/v5Aws/7C8RD6fY6STi1eAnCu7Ez93oHcPdpyStGnFel/aIB407Q==",
+      "path": "google.protobuf/3.22.0",
+      "hashPath": "google.protobuf.3.22.0.nupkg.sha512"
+    },
+    "Ionic.Zlib.Core/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3GBgjMQA/uPTiqv+wMCpLsyK5dcHCF6EV8+pg4IMKLbgbMGEtIkvErEO4ql5Cv18n94Smf3NAhY/sCed2Tb+Tw==",
+      "path": "ionic.zlib.core/1.0.0",
+      "hashPath": "ionic.zlib.core.1.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "RC4Cryptography/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8v4gGw5GxVuSjPR90PGD4Tb7y5Y/z1oCzK7mng+l4pJkuC3KeRqsIbZCsKgMSdGhxkbpPKA8o6yi6Hd3rJRmpQ==",
+      "path": "rc4cryptography/1.0.1",
+      "hashPath": "rc4cryptography.1.0.1.nupkg.sha512"
+    },
+    "RS.Tools.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RS.Tools.Network/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
