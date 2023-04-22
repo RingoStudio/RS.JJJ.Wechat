@@ -5,11 +5,12 @@
     <RootNamespace>RS.Snail.JJJ.Wechat</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.23111</AssemblyVersion>
-    <FileVersion>1.0.0.23111</FileVersion>
+    <AssemblyVersion>1.0.0.23112</AssemblyVersion>
+    <FileVersion>1.0.0.23112</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fleck" Version="1.2.0" />
     <PackageReference Include="Google.Protobuf" Version="3.22.0" />
   </ItemGroup>
 

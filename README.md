@@ -14,6 +14,7 @@
 - 自动合并短的文本、艾特信息（可设定单条信息最大长度）
 - 自动分割过长的单条信息
 
+
 ## 可用版本
 微信3.7.0.30 [下载地址](https://aichunjing.lanzoui.com/b00dd197e)
 
@@ -26,12 +27,27 @@ Visual Studio 2022 + .Net 6.0
 - 不需要注册COM组件
 - 自行准备一个SOCKET SERVER类，在RS.Snail.JJJ.Wechat.api.Context._messageServer处使用
 
+
+## 初始化一个机器人实例
+
+```c#
+    var wechat = new RS.JJJ.Wechat.Service();
+    bool v = wechat.Init(
+                        new List<string> { "wxid_1234_" }, 
+                        msg => Console.Write(msg)
+                        );
+    wechat.StartReceive();
+```
+
+
 ## 请注意
 - 本项目目前仍未正式投入使用，正在持续完善中
 
+
 ## 更新记录
-#### 2023.04.19
+#### 2023.04.21
 - 首次发布
+
 
 ## 免责声明
 代码仅供交流学习使用，请勿用于非法用途和商业用途！如因此产生任何法律纠纷，均与作者无关！

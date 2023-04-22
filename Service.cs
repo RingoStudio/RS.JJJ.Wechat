@@ -8,11 +8,12 @@ namespace RS.Snail.JJJ.Wechat
         #region FIELDS
         private Context _context;
         private Action<dynamic>? _msgCallback = null;
+        private Action<dynamic>? _recallCallback = null;
         private Action<string, bool>? _wechatStatCallback = null;
         #endregion
 
         #region INIT
-        public Service(bool isRestart, bool isTest = false)
+        public Service(bool isRestart = false, bool isTest = false)
         {
             _context = new Context(isRestart, isTest);
         }
@@ -21,13 +22,14 @@ namespace RS.Snail.JJJ.Wechat
         /// </summary>
         /// <param name="wxids">需要登录的微信号列表</param>
         /// <param name="msgCallback">微信消息回调</param>
+        /// <param name="recallCallback">撤回消息回调</param>
         /// <param name="wechatStatCallback">微信号状态变更回调</param>
         /// <returns></returns>
-        public bool Init(IList<string> wxids, Action<dynamic> msgCallback, Action<string, bool> wechatStatCallback = null)
+        public bool Init(IList<string> wxids, Action<dynamic> msgCallback, Action<dynamic> recallCallback = null, Action<string, bool> wechatStatCallback = null)
         {
             _msgCallback = msgCallback;
             _wechatStatCallback = wechatStatCallback;
-            return _context.Init(wxids, _msgCallback);
+            return _context.Init(wxids, _msgCallback, recallCallback);
         }
         #endregion
 

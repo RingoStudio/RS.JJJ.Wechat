@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using RS.Snail.JJJ.Wechat.native;
 using RS.Snail.JJJ.Wechat.utils;
-using RS.Tools.Common.Interface;
 using RS.Tools.Common.Utils;
-using RS.Tools.Network.Interface;
-using RS.Tools.Network.Sockets;
+// using RS.Tools.Network.Sockets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,6 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fleck;
+using System.Net;
+using RS.Tools.Network.Sockets;
 
 namespace RS.Snail.JJJ.Wechat.api
 {
@@ -23,6 +24,7 @@ namespace RS.Snail.JJJ.Wechat.api
         #region FIELDS
         private WechatInstanceMgr _instanceMgr;
         private Action<dynamic> _receivedCallback;
+        private Action<dynamic> _recallCallback;
         private bool _testFlag;
         #endregion
 
@@ -33,13 +35,15 @@ namespace RS.Snail.JJJ.Wechat.api
             _testFlag = testFlag;
         }
 
-        public bool Init(IList<string> wxids, Action<dynamic> receivedCallback)
+        public bool Init(IList<string> wxids, Action<dynamic> receivedCallback, Action<dynamic> recallCallback)
         {
-            if(!_testFlag)
+            if (!_testFlag)
             {
                 if (!_instanceMgr.Init(wxids)) return false;
             }
             _receivedCallback = receivedCallback;
+            _recallCallback = recallCallback;
+            _msgNeedCache = _recallCallback is not null;
             InitMessageQueue(wxids);
             return true;
         }
@@ -681,8 +685,26 @@ namespace RS.Snail.JJJ.Wechat.api
         #endregion
 
         #region MESSAGE SERVICE
+        /// <summary>
+        /// 消息接收服务器
+        /// </summary>
+        //private RSTCPServer _messageServer;
         private RSTCPServer _messageServer;
+        /// <summary>
+        /// 消息接收服务器端口
+        /// </summary>
         private int _messageServerPort;
+        /// <summary>
+        /// 消息缓存
+        /// </summary>
+        private ConcurrentDictionary<string, Dictionary<ulong, dynamic>> _msgCache = new();
+        /// <summary>
+        /// 是否需要缓存消息
+        /// </summary>
+        private bool _msgNeedCache = false;
+        /// <summary>
+        /// 可接收的消息类型
+        /// </summary>
         private static List<RS.Tools.Common.Enums.WechatMessageType> _receiveMessageTypes = new()
         {
             RS.Tools.Common.Enums.WechatMessageType.Text,
@@ -708,15 +730,16 @@ namespace RS.Snail.JJJ.Wechat.api
             {
                 _messageServer = new RSTCPServer(_messageServerPort)
                 {
-                    // OnReceived = (c, d) => OnMessageReceived(d),
+                    OnReceived = (c, d) => OnMessageReceived(d),
 
 #if DEBUG
-                    OnConnected = c => Console.WriteLine("连接 " + c.ToString()),
-                    OnDisconnected = c => Console.WriteLine("断开 " + c.ToString()),
+                    //OnConnected = c => Console.WriteLine("连接 " + c.ToString()),
+                    //OnDisconnected = c => Console.WriteLine("断开 " + c.ToString()),
 #endif
                 };
 
                 _messageServer.Start();
+
                 return true;
             }
             catch (Exception)
@@ -734,7 +757,7 @@ namespace RS.Snail.JJJ.Wechat.api
         {
             try
             {
-                if (_messageServer is null || (!_messageServer.Booting && !_messageServer.Running)) return false;
+                if (_messageServer is null) return false;
                 _messageServer?.Stop();
                 return true;
             }
@@ -744,33 +767,53 @@ namespace RS.Snail.JJJ.Wechat.api
             }
             return false;
         }
-
+        /// <summary>
+        /// 消息到达时触发
+        /// </summary>
+        /// <param name="raw"></param>
         private void OnMessageReceived(byte[] raw)
         {
             try
             {
                 if (raw is null || raw.Length <= 0) return;
                 var data = Encoding.UTF8.GetString(raw);
-                Console.WriteLine(data);
                 var jo = JObject.Parse(data);
+            //    Console.WriteLine(jo);
                 if (jo is not JObject) return;
 
                 // 过滤掉自己发送的消息
                 if (JSONHelper.ParseBool(jo["isSendMsg"])) return;
 
-                // 过滤掉不关注的消息类型
                 var type = (RS.Tools.Common.Enums.WechatMessageType)JSONHelper.ParseInt(jo["type"]);
-                if (!_receiveMessageTypes.Contains(type)) return;
-
-                // type49(File) 过滤掉不是文件的情况
-                if (type == Tools.Common.Enums.WechatMessageType.File)
+                if (type == Tools.Common.Enums.WechatMessageType.Recall && _msgNeedCache)
                 {
-                    var path = JSONHelper.ParseString(jo["filepath"]);
-                    if (!path.Contains("\\FileStorage\\MsgAttach\\")) return;
+                    // 撤回消息
+                    var msgID = JSONHelper.ParseULong(jo["msgid"]);
+                    var self = JSONHelper.ParseString(jo["self"]);
+
+                    var recall = QueryCachedMessage(self, msgID);
+                    if (recall is not null) _recallCallback?.Invoke(recall);
                 }
+                else
+                {
+                    // 过滤掉不关注的消息类型
+                    if (!_receiveMessageTypes.Contains(type)) return;
 
+                    // type49(File) 过滤掉不是文件的情况
+                    if (type == Tools.Common.Enums.WechatMessageType.File)
+                    {
+                        var path = JSONHelper.ParseString(jo["filepath"]);
+                        if (!path.Contains("\\FileStorage\\MsgAttach\\")) return;
+                    }
 
-                _receivedCallback?.Invoke(jo);
+                    if (_msgNeedCache)
+                    {
+                        // 缓存消息
+                        CacheMessage(jo);
+                    }
+
+                    _receivedCallback?.Invoke(jo);
+                }
             }
             catch (Exception ex)
             {
@@ -778,6 +821,26 @@ namespace RS.Snail.JJJ.Wechat.api
             }
         }
 
+        private void CacheMessage(dynamic msg)
+        {
+            ulong msgid = JSONHelper.ParseULong(msg.msgid);
+            long time = JSONHelper.ParseLong(msg.timestamp);
+            string self = JSONHelper.ParseString(msg.self);
+            if (!_msgCache.ContainsKey(self)) _msgCache.TryAdd(self, new());
+            _msgCache[self][msgid] = new { time = time, msg = msg };
+
+            if (_msgCache[self].Count > 100)
+            {
+                var now = TimeHelper.ToTimeStamp();
+                _msgCache[self] = _msgCache[self].Where(x => now - x.Value.time >= 300).ToDictionary(k => k.Key, k => k.Value);
+            }
+        }
+
+        private dynamic? QueryCachedMessage(string self, ulong msgid)
+        {
+            if (!_msgCache.ContainsKey(self) || !_msgCache[self].ContainsKey(msgid)) return null;
+            return _msgCache[self][msgid]?.msg;
+        }
 
         #endregion
     }

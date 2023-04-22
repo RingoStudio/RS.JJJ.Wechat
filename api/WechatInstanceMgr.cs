@@ -54,7 +54,7 @@ namespace RS.Snail.JJJ.Wechat.api
                 .ManualLoginWechatsInConsole();
             SaveCache();
 
-            if (_pendingLoginInstances.Count > 0) return false;
+            if (_pendingLoginInstances.Where(a => !a.IsInspected).Count() > 0) return false;
 
             return true;
         }
