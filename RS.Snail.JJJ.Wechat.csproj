@@ -5,8 +5,8 @@
     <RootNamespace>RS.Snail.JJJ.Wechat</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.23112</AssemblyVersion>
-    <FileVersion>1.0.0.23112</FileVersion>
+    <AssemblyVersion>1.0.0.23117</AssemblyVersion>
+    <FileVersion>1.0.0.23117</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

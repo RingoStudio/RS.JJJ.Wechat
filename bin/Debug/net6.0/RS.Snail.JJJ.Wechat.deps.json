@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "RS.Snail.JJJ.Wechat/1.0.0": {
         "dependencies": {
-          "Fleck": "1.2.0",
           "Google.Protobuf": "3.22.0",
           "RS.Tools.Common": "1.0.0",
           "RS.Tools.Network": "1.0.0"
@@ -22,14 +21,6 @@
           "lib/netstandard2.0/Aliyun.OSS.Core.dll": {
             "assemblyVersion": "2.13.0.0",
             "fileVersion": "2.13.0.0"
-          }
-        }
-      },
-      "Fleck/1.2.0": {
-        "runtime": {
-          "lib/netcoreapp2.0/Fleck.dll": {
-            "assemblyVersion": "1.2.0.0",
-            "fileVersion": "1.2.0.0"
           }
         }
       },
@@ -97,13 +88,6 @@
       "sha512": "sha512-ElvJwTAdBqFmgb7K4PdxDXPFbOBCIUI5OvCOMfCoUoDL21aivtWMFUtU1v4Dxc2wcrN8XQdY1EKeGFhJK/zVyQ==",
       "path": "aliyun.oss.sdk.netcore/2.13.0",
       "hashPath": "aliyun.oss.sdk.netcore.2.13.0.nupkg.sha512"
-    },
-    "Fleck/1.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bPLXn6QbLAFoviur6XbrKB0Zn6x04E8VibHXyHZeJsoC7bkUl5DVtzM5cZgDuqHkIrBqAXJyTNJwSNIc6wBJ2Q==",
-      "path": "fleck/1.2.0",
-      "hashPath": "fleck.1.2.0.nupkg.sha512"
     },
     "Google.Protobuf/3.22.0": {
       "type": "package",

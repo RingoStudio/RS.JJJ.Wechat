@@ -5,12 +5,7 @@ using RS.Tools.Common.Utils;
 // using RS.Tools.Network.Sockets;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Net;
 using RS.Tools.Network.Sockets;
 
 namespace RS.Snail.JJJ.Wechat.api
@@ -552,6 +547,7 @@ namespace RS.Snail.JJJ.Wechat.api
         private bool _isSending = false;
         private int _curInterval = Configs.MinMessageSendInterval;
         private Random _randInterval = new Random();
+        private Task _sendingTask;
         private void InitMessageQueue(IList<string> wxids)
         {
             _messageQueue = new ConcurrentDictionary<string, ConcurrentQueue<SendMessage>>();
@@ -598,10 +594,11 @@ namespace RS.Snail.JJJ.Wechat.api
 
             targets.Enqueue(message);
 
-            if (!_isSending)
+            if (_sendingTask is null || _sendingTask.IsCompleted)
             {
-                Task.Run(SendingMessage);
+                _sendingTask = Task.Run(() => SendingMessage());
             }
+
         }
 
         private void SendingMessage()
@@ -777,7 +774,7 @@ namespace RS.Snail.JJJ.Wechat.api
                 if (raw is null || raw.Length <= 0) return;
                 var data = Encoding.UTF8.GetString(raw);
                 var jo = JObject.Parse(data);
-            //    Console.WriteLine(jo);
+                // Console.WriteLine(jo);
                 if (jo is not JObject) return;
 
                 // 过滤掉自己发送的消息
@@ -786,10 +783,9 @@ namespace RS.Snail.JJJ.Wechat.api
                 var type = (RS.Tools.Common.Enums.WechatMessageType)JSONHelper.ParseInt(jo["type"]);
                 if (type == Tools.Common.Enums.WechatMessageType.Recall && _msgNeedCache)
                 {
-                    // 撤回消息
+                    // 撤回消息类型，检索消息缓存并回调
                     var msgID = JSONHelper.ParseULong(jo["msgid"]);
                     var self = JSONHelper.ParseString(jo["self"]);
-
                     var recall = QueryCachedMessage(self, msgID);
                     if (recall is not null) _recallCallback?.Invoke(recall);
                 }
@@ -805,11 +801,8 @@ namespace RS.Snail.JJJ.Wechat.api
                         if (!path.Contains("\\FileStorage\\MsgAttach\\")) return;
                     }
 
-                    if (_msgNeedCache)
-                    {
-                        // 缓存消息
-                        CacheMessage(jo);
-                    }
+                    // 缓存消息
+                    if (_msgNeedCache) CacheMessage(jo);
 
                     _receivedCallback?.Invoke(jo);
                 }
