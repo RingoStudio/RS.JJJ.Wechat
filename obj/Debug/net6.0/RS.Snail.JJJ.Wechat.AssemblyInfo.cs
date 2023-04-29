@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("RS.Snail.JJJ.Wechat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.23117")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.23119")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RS.Snail.JJJ.Wechat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RS.Snail.JJJ.Wechat")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.23117")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.23119")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
 

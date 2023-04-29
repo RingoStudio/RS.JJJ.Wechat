@@ -17,8 +17,8 @@ namespace RS.Snail.JJJ.Wechat.api
     {
         #region FIELDS
         private WechatInstanceMgr _instanceMgr;
-        private Action<dynamic> _receivedCallback;
-        private Action<dynamic> _recallCallback;
+        private Func<dynamic, Task> _receivedCallback;
+        private Func<dynamic, Task> _recallCallback;
         private bool _testFlag;
         #endregion
 
@@ -29,7 +29,7 @@ namespace RS.Snail.JJJ.Wechat.api
             _testFlag = testFlag;
         }
 
-        public bool Init(IList<string> wxids, Action<dynamic> receivedCallback, Action<dynamic> recallCallback)
+        public bool Init(IList<string> wxids, Func<dynamic, Task> receivedCallback, Func<dynamic, Task> recallCallback)
         {
             if (!_testFlag)
             {
@@ -544,7 +544,7 @@ namespace RS.Snail.JJJ.Wechat.api
         #region MESSAGE QUEUE
         private ConcurrentDictionary<string, ConcurrentQueue<SendMessage>> _messageQueue;
         private ConcurrentDictionary<string, long> _lastSendLog;
-        private bool _isSending = false;
+        // private bool _isSending = false;
         private int _curInterval = Configs.MinMessageSendInterval;
         private Random _randInterval = new Random();
         private Task _sendingTask;
@@ -623,7 +623,7 @@ namespace RS.Snail.JJJ.Wechat.api
                 }
 
                 // 队列空，结束循环
-                _isSending = false;
+                // _isSending = false;
                 return;
             } while (true);
         }
@@ -763,53 +763,84 @@ namespace RS.Snail.JJJ.Wechat.api
             }
             return false;
         }
+
+        private Task _receiveTask;
+        private ConcurrentQueue<byte[]> _receiveQueue;
         /// <summary>
         /// 消息到达时触发
         /// </summary>
         /// <param name="raw"></param>
-        private void OnMessageReceived(byte[] raw)
+        private async void OnMessageReceived(byte[] raw)
         {
             try
             {
                 if (raw is null || raw.Length <= 0) return;
-                var data = Encoding.UTF8.GetString(raw);
-                var jo = JObject.Parse(data);
-                // Console.WriteLine(jo);
-                if (jo is not JObject) return;
+                _receiveQueue.Enqueue(raw);
 
-                // 过滤掉自己发送的消息
-                if (JSONHelper.ParseBool(jo["isSendMsg"])) return;
-
-                var type = (RS.Tools.Common.Enums.WechatMessageType)JSONHelper.ParseInt(jo["type"]);
-                if (type == Tools.Common.Enums.WechatMessageType.Recall && _msgNeedCache)
+                if (_receiveTask is null || _receiveTask.IsCompleted)
                 {
-                    // 撤回消息类型，检索消息缓存并回调
-                    var msgID = JSONHelper.ParseULong(jo["msgid"]);
-                    var self = JSONHelper.ParseString(jo["self"]);
-                    var recall = QueryCachedMessage(self, msgID);
-                    if (recall is not null) _recallCallback?.Invoke(recall);
+                    _receiveTask = TreatReceiveMessage();
                 }
-                else
-                {
-                    // 过滤掉不关注的消息类型
-                    if (!_receiveMessageTypes.Contains(type)) return;
 
-                    // type49(File) 过滤掉不是文件的情况
-                    if (type == Tools.Common.Enums.WechatMessageType.File)
-                    {
-                        var path = JSONHelper.ParseString(jo["filepath"]);
-                        if (!path.Contains("\\FileStorage\\MsgAttach\\")) return;
-                    }
 
-                    // 缓存消息
-                    if (_msgNeedCache) CacheMessage(jo);
-
-                    _receivedCallback?.Invoke(jo);
-                }
             }
             catch (Exception ex)
             {
                 Logger.Instance.Write(ex, "Wechat.OnMesageReceived");
+            }
+        }
+
+        private async Task TreatReceiveMessage()
+        {
+            try
+            {
+                do
+                {
+                    if (_receiveQueue.Count == 0) return;
+                    var flag = _receiveQueue.TryDequeue(out var raw);
+                    if (!flag || raw is null || raw.Length <= 0) return;
+
+                    var data = Encoding.UTF8.GetString(raw);
+                    var jo = JObject.Parse(data);
+                    // Console.WriteLine(jo);
+                    if (jo is not JObject) return;
+
+                    // 过滤掉自己发送的消息
+                    if (JSONHelper.ParseBool(jo["isSendMsg"])) return;
+
+                    var type = (RS.Tools.Common.Enums.WechatMessageType)JSONHelper.ParseInt(jo["type"]);
+                    if (type == Tools.Common.Enums.WechatMessageType.Recall && _msgNeedCache)
+                    {
+                        // 撤回消息类型，检索消息缓存并回调
+                        var msgID = JSONHelper.ParseULong(jo["msgid"]);
+                        var self = JSONHelper.ParseString(jo["self"]);
+                        var recall = QueryCachedMessage(self, msgID);
+                        if (recall is not null) await _recallCallback?.Invoke(recall);
+                    }
+                    else
+                    {
+                        // 过滤掉不关注的消息类型
+                        if (!_receiveMessageTypes.Contains(type)) return;
+
+                        // type49(File) 过滤掉不是文件的情况
+                        if (type == Tools.Common.Enums.WechatMessageType.File)
+                        {
+                            var path = JSONHelper.ParseString(jo["filepath"]);
+                            if (!path.Contains("\\FileStorage\\MsgAttach\\")) return;
+                        }
+
+                        // 缓存消息
+                        if (_msgNeedCache) CacheMessage(jo);
+
+                        if (_receivedCallback is not null) await _receivedCallback.Invoke(jo);
+                    }
+                } while (true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

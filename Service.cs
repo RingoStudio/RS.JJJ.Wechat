@@ -7,9 +7,9 @@ namespace RS.Snail.JJJ.Wechat
     {
         #region FIELDS
         private Context _context;
-        private Action<dynamic>? _msgCallback = null;
-        private Action<dynamic>? _recallCallback = null;
-        private Action<string, bool>? _wechatStatCallback = null;
+        private Func<dynamic, Task>? _msgCallback = null;
+        private Func<dynamic, Task>? _recallCallback = null;
+        private Func<string, bool, Task>? _wechatStatCallback = null;
         #endregion
 
         #region INIT
@@ -25,7 +25,7 @@ namespace RS.Snail.JJJ.Wechat
         /// <param name="recallCallback">撤回消息回调</param>
         /// <param name="wechatStatCallback">微信号状态变更回调</param>
         /// <returns></returns>
-        public bool Init(IList<string> wxids, Action<dynamic> msgCallback, Action<dynamic> recallCallback = null, Action<string, bool> wechatStatCallback = null)
+        public bool Init(IList<string> wxids, Func<dynamic, Task> msgCallback, Func<dynamic, Task> recallCallback = null, Func<string, bool, Task> wechatStatCallback = null)
         {
             _msgCallback = msgCallback;
             _wechatStatCallback = wechatStatCallback;
